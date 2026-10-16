@@ -1,0 +1,21 @@
+{
+  // ScalpGOD landing page: static site plus a small Worker for waitlist sign-ups.
+  // Local preview:  npx wrangler dev
+  // Deploy:         npx wrangler deploy
+  // Before the first deploy, create the KV namespace and paste its id below:
+  //   npx wrangler kv namespace create scalpgod-waitlist
+  "$schema": "https://unpkg.com/wrangler@4.146.0/config-schema.json",
+  "name": "scalpgod",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "kv_namespaces": [
+    { "binding": "WAITLIST", "id": "fe5a905bb07c47fcab5ef831b7885a74" }
+  ],
+  "observability": { "enabled": true }
+}
